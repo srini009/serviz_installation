@@ -30,3 +30,24 @@ and other requirements for radical-pilot setup and working. The instructions tha
 4. For each of the three packages (ascent, conduit, and vtk-h) in ```../serviz-installation-instructions/spack_builtin_repo_customization/```, copy-paste the ```package.py``` inside each of them to the corresponding spack built-in package directories in ```$HOME/spack/var/spack/repos/builtin/packages/*```
 5. Add the custom mochi-spack-packages repo: ```cd ../mochi-spack-packages && git checkout experimental && spack repo add .```
 6. Note that the ```experimental``` branch for this repo needs to be used. Verify that the spack repo got added successfully by running: ```spack info mochi-symbiomon```. If you see some valid output, you are good to go!
+
+### Step 3: Installation of SERVIZ microservice and its dependencies:
+#### Note: At this point, make sure your environment has the right compilers (gcc@9.3.0), Conda programming environments, and spack environments correctly loaded. To look at a reference file, see ```$HOME/serviz-installation-instructions/spack_environment_recipe/theta_sourceme.sh```
+1. Go to the SERVIZ github directory: ```cd ../serviz```
+2. Create a spack environment using the already-provided spack.yaml file: ```spack env create serviz spack.yaml```
+3. Install the environment using: ```spack install``
+4. Install the SERVIZ microservice using: ``mkdir build && cd build && cmake .. -DENABLE_TESTS=OFF -DENABLE_EXAMPLES=ON -DENABLE_BEDROCK=OFF```
+5. Login to the cmake shell: ```cd build && ccmake .```
+6. We would need to add the spack-installed ```include``` and ```library``` directories to ```CMAKE_CXX_FLAGS```, ```CMAKE_C_FLAGS```, ```CMAKE_EXE_LINKER_FLAGS```, and ```CMAKE_SHARED_LINKER_FLAGS``` respectively. To see an example of what content to add, look inside ```$HOME/serviz-installation-instructions/spack_environment_recipe/theta.cmake_options```
+7. Once this is done, run: ```make -j20 && make install```. 
+
+### Step 4: Installation of custom AMR-WIND:
+1. ```mkdir -p $HOME/AMR_WIND_INSTALL```
+2. ```cd $HOME/amr-wind```
+3. ```mkdir build && cd build```
+4. ```cmake -DAMR_WIND_ENABLE_TESTS:BOOL=ON -DAMR_WIND_ENABLE_ASCENT:BOOL=ON -DAscent_DIR:PATH="/spack/path/to/ascent/install/lib/cmake/ascent"" -DConduit_DIR:PATH="/spack/path/to/conduit/install" -DAMR_WIND_ENABLE_MPI:BOOL=ON ..```
+5. ```make -j20 && make install```
+
+### Step 5: Run AMR-WIND experiments using SERVIZ and RADICAL-PILOT
+1. At this point you should have all the software components successfully installed and ready to run.
+2. Go to the amr-wind-experiments repo: ```cd $HOME/amr-wind-experiments/``` and start running the experiments by making adjustments to the  Python run scripts as necessary. These scripts are numbered based on the configurations that they represent.
