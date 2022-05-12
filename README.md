@@ -26,10 +26,11 @@ and other requirements for radical-pilot setup and working. The instructions tha
 ### Step 2: Installation of custom spack and mochi-spack-packages:
 1. Download and install spack: https://spack.io/ 
 2. Assuming that spack is download at $HOME/spack, ```cd $HOME/spack```.
-3. What we need to do next is to customize some spack built-in packages. The recipe for the spack built-in packages are found in ```$HOME/spack/var/spack/repos/builtin/packages/*```
-4. For each of the three packages (ascent, conduit, and vtk-h) in ```../serviz-installation-instructions/spack_builtin_repo_customization/```, copy-paste the ```package.py``` inside each of them to the corresponding spack built-in package directories in ```$HOME/spack/var/spack/repos/builtin/packages/*```
-5. Add the custom mochi-spack-packages repo: ```cd ../mochi-spack-packages && git checkout experimental && spack repo add .```
-6. Note that the ```experimental``` branch for this repo needs to be used. Verify that the spack repo got added successfully by running: ```spack info mochi-symbiomon```. If you see some valid output, you are good to go!
+3. Copy the spack packages file into your local spack directory: ```cp  $HOME/serviz-installation-instructions/spack_builtin_repo_customization/packages.yaml ~/.spack/cray/packages.yaml
+4. What we need to do next is to customize some spack built-in packages. The recipe for the spack built-in packages are found in ```$HOME/spack/var/spack/repos/builtin/packages/*```
+5. For each of the three packages (ascent, conduit, and vtk-h) in ```../serviz-installation-instructions/spack_builtin_repo_customization/```, copy-paste the ```package.py``` inside each of them to the corresponding spack built-in package directories in ```$HOME/spack/var/spack/repos/builtin/packages/*```
+6. Add the custom mochi-spack-packages repo: ```cd ../mochi-spack-packages && git checkout experimental && spack repo add .```
+7. Note that the ```experimental``` branch for this repo needs to be used. Verify that the spack repo got added successfully by running: ```spack info mochi-symbiomon```. If you see some valid output, you are good to go!
 
 ### Step 3: Installation of SERVIZ microservice and its dependencies:
 #### Note: At this point, make sure your environment has the right compilers (gcc@9.3.0), Conda programming environments, and spack environments correctly loaded. To look at a reference file, see ```$HOME/serviz-installation-instructions/spack_environment_recipe/theta_sourceme.sh```
