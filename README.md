@@ -47,9 +47,8 @@ and other requirements for radical-pilot setup and working. The instructions tha
 2. ```mkdir -p $HOME/AMR_WIND_INSTALL```
 3. ```cd $HOME/amr-wind```
 4. ```mkdir build && cd build```
-5. ```cmake -DAMR_WIND_ENABLE_TESTS:BOOL=ON -DAMR_WIND_ENABLE_ASCENT:BOOL=ON -DAscent_DIR:PATH="/spack/path/to/ascent/install/lib/cmake/ascent"" -DConduit_DIR:PATH="/spack/path/to/conduit/install" -DCMAKE_INSTALL_PREFIX=$HOME/AMR_WIND_INSTALL -DAMR_WIND_ENABLE_MPI:BOOL=ON ..```
+5. ```cmake .. -DAMR_WIND_ENABLE_TESTS:BOOL=ON -DAMR_WIND_ENABLE_ASCENT:BOOL=ON -DAscent_DIR:PATH="/spack/path/to/ascent/install/lib/cmake/ascent" -DConduit_DIR:PATH="/spack/path/to/conduit/install" -DCMAKE_INSTALL_PREFIX=$HOME/AMR_WIND_INSTALL -DAMR_WIND_ENABLE_MPI:BOOL=ON -DAMR_WIND_ENABLE_MPI:BOOL=ON```
 6. ```make -j20 && make install```
-
 ### Step 5: Run AMR-WIND experiments using SERVIZ and RADICAL-PILOT
 1. At this point you should have all the software components successfully installed and ready to run.
 2. Go to the amr-wind-experiments repo: ```cd $HOME/amr-wind-experiments/``` and start running the experiments by making adjustments to the  Python run scripts as necessary. These scripts are numbered based on the configurations that they represent.
