@@ -1,0 +1,10 @@
+packages:
+  all:
+    providers:
+      mpi: [mpich]
+  mpich:
+    buildable: false
+    externals:
+    - spec: mpich@7.7.18
+      modules:
+      - cray-mpich/7.7.18
