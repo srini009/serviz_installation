@@ -42,11 +42,12 @@ and other requirements for radical-pilot setup and working. The instructions tha
 7. Once this is done, run: ```make -j20 && make install```. 
 
 ### Step 4: Installation of custom AMR-WIND:
-1. ```mkdir -p $HOME/AMR_WIND_INSTALL```
-2. ```cd $HOME/amr-wind```
-3. ```mkdir build && cd build```
-4. ```cmake -DAMR_WIND_ENABLE_TESTS:BOOL=ON -DAMR_WIND_ENABLE_ASCENT:BOOL=ON -DAscent_DIR:PATH="/spack/path/to/ascent/install/lib/cmake/ascent"" -DConduit_DIR:PATH="/spack/path/to/conduit/install" -DAMR_WIND_ENABLE_MPI:BOOL=ON ..```
-5. ```make -j20 && make install```
+1. Download the custom amr-wind repository: ```git clone --recursive https://github.com/srini009/amr-wind.git```
+2. ```mkdir -p $HOME/AMR_WIND_INSTALL```
+3. ```cd $HOME/amr-wind```
+4. ```mkdir build && cd build```
+5. ```cmake -DAMR_WIND_ENABLE_TESTS:BOOL=ON -DAMR_WIND_ENABLE_ASCENT:BOOL=ON -DAscent_DIR:PATH="/spack/path/to/ascent/install/lib/cmake/ascent"" -DConduit_DIR:PATH="/spack/path/to/conduit/install" -DAMR_WIND_ENABLE_MPI:BOOL=ON ..```
+6. ```make -j20 && make install```
 
 ### Step 5: Run AMR-WIND experiments using SERVIZ and RADICAL-PILOT
 1. At this point you should have all the software components successfully installed and ready to run.
