@@ -37,7 +37,7 @@ and other requirements for radical-pilot setup and working. The instructions tha
 1. Go to the SERVIZ github directory: ```cd ../serviz```
 2. Create a spack environment using the already-provided spack.yaml file: ```spack env create serviz spack.yaml```
 3. Install the environment using: ```spack install``
-4. Install the SERVIZ microservice using: ```mkdir build && cd build && cmake .. -DENABLE_TESTS=OFF -DENABLE_EXAMPLES=ON -DENABLE_BEDROCK=OFF```
+4. Install the SERVIZ microservice using: ```mkdir build && cd build && cmake .. -DENABLE_TESTS=OFF -DENABLE_EXAMPLES=ON -DENABLE_BEDROCK=OFF -DCMAKE_INSTALL_PREFIX=`pwd` -DCMAKE_C_COMPILER=cc -DCMAKE_CXX_COMPILER=CC```
 5. Login to the cmake shell: ```cd build && ccmake .```
 6. We would need to add the spack-installed ```include``` and ```library``` directories to ```CMAKE_CXX_FLAGS```, ```CMAKE_C_FLAGS```, ```CMAKE_EXE_LINKER_FLAGS```, and ```CMAKE_SHARED_LINKER_FLAGS``` respectively. To see an example of what content to add, look inside ```$HOME/serviz-installation-instructions/spack_environment_recipe/theta.cmake_options```
 7. Once this is done, run: ```make -j20 && make install```. 
