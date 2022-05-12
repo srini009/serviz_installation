@@ -2,7 +2,6 @@
 module load cmake
 module swap PrgEnv-intel PrgEnv-gnu
 module swap cray-libsci/20.06.1 cray-libsci/20.03.1
-module load craype-hugepages8M
 module unload darshan
 . ~/spack/share/spack/setup-env.sh
 spack env activate ascent
