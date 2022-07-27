@@ -1,17 +1,17 @@
 Repository containing the installation instructions and customization scripts for SC 2022 paper427: "SERVIZ: A Shared In Situ Visualization Service"
-## Note: It is important to follow these steps in the exact order specified to correctly set up the software components for reproducibility.
-## Note: The instructions here assume that you are logged in to the Theta cluster at ALCF
-## Note: It is assumed that the directory structure looks like the following:
+
+### Note: It is important to follow these steps in the exact order specified to correctly set up the software components for reproducibility. The instructions here assume that you are logged in to the Theta cluster at ALCF. It is assumed that the directory structure looks like the following:
   * $HOME/serviz-installation-instructions/
   * $HOME/amr-wind/
   * $HOME/serviz/
   * $HOME/amr-wind-experiments/
   * $HOME/mochi-spack-packages/
+  * $HOME/ascent
 
 ### Step 1: Installation of radical-pilot components:
 
-First, go over the installation instructions: https://radicalpilot.readthedocs.io/en/stable/installation.html. The following instructions assume that you have already installed and have a working MongoDB installation, Python, Conda, and other dependencies for radical-pilot setup and working. We recommend using virtualenv and pip for installing radical-pilot. The instructions that follow are only for customizing radical-pilot for SERVIZ. These instructions
-assume that you are inside a Python virtualenv.
+First, go over the installation instructions here: https://radicalpilot.readthedocs.io/en/stable/installation.html. The following instructions assume that you have a working MongoDB and Python3.6+ installation. We **recommend** using virtualenv and pip for installing radical-pilot and its dependencies. The instructions that follow are only for customizing radical-pilot for SERVIZ. These instructions
+assume that you are **inside** a Python virtualenv.
 1. Install radical-saga@1.12.0 using the command: ```pip install radical.saga==1.12.0```
 2. Install radical-utils@1.12.0 using the command: ```pip install radical.utils==1.12.0```
 3. The third component, radical-pilot would require a custom installation. For this:
@@ -25,9 +25,9 @@ assume that you are inside a Python virtualenv.
 
 ### Step 2: Installation of custom spack and mochi-spack-packages:
 1. Download and install spack: https://spack.io/ 
-2. Assuming that spack is download at $HOME/spack, ```cd $HOME/spack```.
-3. Copy the spack packages file into your local spack directory: ```cp  $HOME/serviz-installation-instructions/spack_builtin_repo_customization/packages.yaml ~/.spack/cray/packages.yaml
-4. What we need to do next is to customize some spack built-in packages. The recipe for the spack built-in packages are found in ```$HOME/spack/var/spack/repos/builtin/packages/*```
+2. Assuming that spack is downloaded at $HOME/spack, ```cd $HOME/spack```.
+3. Copy the spack packages file into your local spack directory: ```cp  $HOME/serviz-installation-instructions/spack_builtin_repo_customization/packages.yaml ~/.spack/cray/packages.yaml```
+4. We need to customize some built-in spack packages. The recipe for the spack built-in packages are found in ```$HOME/spack/var/spack/repos/builtin/packages/*```
 5. For each of the three packages (ascent, conduit, and vtk-h) in ```../serviz-installation-instructions/spack_builtin_repo_customization/```, copy-paste the ```package.py``` inside each of them to the corresponding spack built-in package directories in ```$HOME/spack/var/spack/repos/builtin/packages/*```
 6. Add the custom mochi-spack-packages repo: ```cd ../mochi-spack-packages && git checkout experimental && spack repo add .```
 7. Note that the ```experimental``` branch for this repo needs to be used. Verify that the spack repo got added successfully by running: ```spack info mochi-symbiomon```. If you see some valid output, you are good to go!
