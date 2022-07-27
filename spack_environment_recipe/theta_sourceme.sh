@@ -12,5 +12,4 @@ export PKG_CONFIG_PATH=/usr/lib64/pkgconfig:/home/sramesh/VIZ_SERVICE/serviz/bui
 export RADICAL_LOG_LVL=DEBUG
 export RADICAL_PROFILE=TRUE
 export RADICAL_PILOT_DBURL=mongodb://rct:jdWeRT634k@thetalogin3.tmi.alcf.anl.gov:6874/rct_db
-source $HOME/.miniconda3/bin/activate
-conda activate rct
+source $HOME/venv/bin/activate
