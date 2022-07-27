@@ -10,17 +10,17 @@ Repository containing the installation instructions and customization scripts fo
 
 ### Step 1: Installation of radical-pilot components:
 
-First, go over the installation instructions: https://radicalpilot.readthedocs.io/en/stable/installation.html. The following instructions assume that you have already installed and have a working MongoDB installation, Python, Conda,
-and other requirements for radical-pilot setup and working. The instructions that follow are only for customizing radical-pilot for SERVIZ.
+First, go over the installation instructions: https://radicalpilot.readthedocs.io/en/stable/installation.html. The following instructions assume that you have already installed and have a working MongoDB installation, Python, Conda, and other dependencies for radical-pilot setup and working. We recommend using virtualenv and pip for installing radical-pilot. The instructions that follow are only for customizing radical-pilot for SERVIZ. These instructions
+assume that you are inside a Python virtualenv.
 1. Install radical-saga@1.12.0 using the command: ```pip install radical.saga==1.12.0```
 2. Install radical-utils@1.12.0 using the command: ```pip install radical.utils==1.12.0```
 3. The third component, radical-pilot would require a custom installation. For this:
-   * First download the radical.pilot github repo locally using git: ```git clone https://github.com/radical-cybertools/radical.pilot.git@v1.12.0```
-   * Run: ```cd radical-pilot && cp ../serviz-installation-instructions/radical-pilot-customization/aprun.py ./src/radical/pilot/agent/launch_method/aprun.py```
+   * First download the radical.pilot github repo locally using git: ```git clone https://github.com/radical-cybertools/radical.pilot.git && git checkout v1.12.0```
+   * Run: ```cd radical-pilot && cp ../serviz-installation-instructions/radical_pilot_customization/aprun.py ./src/radical/pilot/agent/launch_method/aprun.py```
    * Run: ```vi ./src/radical/pilot/agent/launch_method/aprun.py```, and look for the line that says "REPLACEME". You would need to create a protection domain on Theta and use that protection domain name here.
    * Assuming you are still in $HOME/radical-pilot, run: ```pip install .```
    * That should install the "modified" radical-pilot stack. Check that the entire radical-stack has installed correctly at version 1.12.0 by running ```radical-stack```
-   * Copy the Theta resource JSON config: ```cp ../serviz-installation-instructions/radical-pilot-customization/resource_anl.json ~/.radical/pilot/configs/resource_anl.json```. This would override the default JSON configuration file to tell radical-pilot to only use 60 out of the total 64 cores on each Theta KNL node.
+   * Copy the Theta resource JSON config: ```cp ../serviz-installation-instructions/radical_pilot_customization/resource_anl.json ~/.radical/pilot/configs/resource_anl.json```. This would override the default JSON configuration file to tell radical-pilot to only use 60 out of the total 64 cores on each Theta KNL node.
    * At this point, run a small test program to ensure that you are able to use radical-pilot along with the MongoDB installation to submit and run a batch job ensemble on Theta. 
 
 ### Step 2: Installation of custom spack and mochi-spack-packages:
