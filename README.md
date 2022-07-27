@@ -33,7 +33,7 @@ assume that you are **inside** a Python virtualenv.
 7. Note that the ```experimental``` branch for this repo needs to be used. Verify that the spack repo got added successfully by running: ```spack info mochi-symbiomon```. If you see some valid output, you are good to go!
 
 ### Step 3: Installation of SERVIZ microservice and its dependencies:
-#### Note: At this point, make sure your environment has the right compilers (gcc@9.3.0), Conda programming environments, and spack environments correctly loaded. To look at a reference file, see ```$HOME/serviz-installation-instructions/spack_environment_recipe/theta_sourceme.sh```
+#### Note: At this point, make sure your environment has the right compilers (gcc@9.3.0), Python programming environments, and spack environments correctly loaded. To look at a reference file, see ```$HOME/serviz-installation-instructions/spack_environment_recipe/theta_sourceme.sh```
 1. Go to the SERVIZ github directory: ```cd ../serviz```
 2. Create a spack environment using the already-provided spack.yaml file: ```spack env create serviz spack.yaml```
 3. Install the environment using: ```spack install``
