@@ -41,7 +41,7 @@ class Ascent(CMakePackage, CudaPackage):
     maintainers = ['cyrush']
 
     version('develop',
-            branch='vizservice',
+            branch='develop',
             git='https://github.com/srini009/ascent.git',
             submodules=True)
 
