@@ -8,16 +8,16 @@ Repository containing the installation instructions and customization scripts fo
   * $HOME/mochi-spack-packages/
   * $HOME/ascent/
 
-### Step 1: Installation of radical-pilot components:
+### Step 1: Installation of (custom) RADICAL-PILOT components:
 
-First, go over the installation instructions here: https://radicalpilot.readthedocs.io/en/stable/installation.html. The following instructions assume that you have a working MongoDB and Python3.6+ installation. We **recommend** using virtualenv and pip for installing radical-pilot and its dependencies. The instructions that follow are only for customizing radical-pilot for SERVIZ. These instructions
-assume that you are **inside** a Python virtualenv.
+Follow the steps here: https://github.com/radical-project/hep-cce/blob/master/theta%40alcf/rct-deployment.md to install RADICAL-PILOT
+and its dependencies on Theta@ALCF. The instructions that follow assume that you: (1) have a working MongoDB installation, (2) have a working Python 3.6+ installation, and (3) that you are **inside** a Python virtualenv or Conda env that allows you to install packages using ```pip```.
 1. Install radical-saga@1.12.0 using the command: ```pip install radical.saga==1.12.0```
 2. Install radical-utils@1.12.0 using the command: ```pip install radical.utils==1.12.0```
-3. The third component, radical-pilot would require a custom installation. For this:
-   * First download the radical.pilot github repo locally using git: ```git clone https://github.com/radical-cybertools/radical.pilot.git && git checkout v1.12.0```
-   * Run: ```cd radical-pilot && cp ../serviz-installation-instructions/radical_pilot_customization/aprun.py ./src/radical/pilot/agent/launch_method/aprun.py```
-   * Run: ```vi ./src/radical/pilot/agent/launch_method/aprun.py```, and look for the line that says "REPLACEME". You would need to create a protection domain on Theta and use that protection domain name here.
+3. The third component, ```radical.pilot``` would require a **custom** installation. For this:
+   * Download ```radical.pilot``` from the GitHub repo using: ```git clone https://github.com/radical-cybertools/radical.pilot.git && git checkout v1.12.0```. Note the use of the ```v1.12.0``` branch. 
+   * Run: ```cd radical-pilot && cp ../serviz-installation-instructions/radical_pilot_customization/aprun.py ./src/radical/pilot/agent/launch_method/aprun.py```. We need to override the ```aprun.py``` file with the custom one provided in this repo.
+   * Run: ```vi ./src/radical/pilot/agent/launch_method/aprun.py```, and look for the line that says "REPLACEME". You would need to create a protection domain on Theta and use that protection domain name here. Protection domains on Theta can be created using: ```apstat -P | grep ${PDOMAIN} || apmgr pdomain -c -u ${PDOMAIN}```
    * Assuming you are still in $HOME/radical-pilot, run: ```pip install .```
    * That should install the "modified" radical-pilot stack. Check that the entire radical-stack has installed correctly at version 1.12.0 by running ```radical-stack```
    * Copy the Theta resource JSON config: ```cp ../serviz-installation-instructions/radical_pilot_customization/resource_anl.json ~/.radical/pilot/configs/resource_anl.json```. This would override the default JSON configuration file to tell radical-pilot to only use 60 out of the total 64 cores on each Theta KNL node.
