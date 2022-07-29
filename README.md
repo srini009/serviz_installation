@@ -4,7 +4,7 @@ Repository containing the installation instructions and customization scripts fo
   * $HOME/serviz-installation-instructions/
   * $HOME/amr-wind/
   * $HOME/serviz/
-  * $HOME/amr-wind-experiments/
+  * $HOME/serviz-experiments/
   * $HOME/mochi-spack-packages/
   * $HOME/ascent/
 
@@ -62,4 +62,4 @@ installed in your spack environment through the spack.yaml file. We are building
 
 ### Step 6: Run AMR-WIND and Kripke experiments:
 1. At this point you should have all the software components successfully installed and ready to run.
-2. Go to the amr-wind-experiments repo: ```cd $HOME/amr-wind-experiments/``` and start running the experiments by making adjustments to the Python run scripts as necessary. These scripts are numbered based on the configurations that they represent.
+2. Go to the serviz-experiments repo: ```cd $HOME/serviz-experiments/``` and start running the experiments by making adjustments to the Python run scripts as necessary. These scripts are numbered based on the configurations that they represent.
