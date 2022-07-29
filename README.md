@@ -49,6 +49,17 @@ and its dependencies on Theta@ALCF. The instructions that follow assume that you
 4. ```mkdir build && cd build```
 5. ```cmake .. -DAMR_WIND_ENABLE_TESTS:BOOL=ON -DAMR_WIND_ENABLE_ASCENT:BOOL=ON -DAscent_DIR:PATH="/spack/path/to/ascent/install/lib/cmake/ascent" -DConduit_DIR:PATH="/spack/path/to/conduit/install" -DCMAKE_INSTALL_PREFIX=$HOME/AMR_WIND_INSTALL -DAMR_WIND_ENABLE_MPI:BOOL=ON -DAMR_WIND_ENABLE_MPI:BOOL=ON```
 6. ```make -j20 && make install```
-### Step 5: Run AMR-WIND experiments using SERVIZ and RADICAL-PILOT
+
+### Step 5: Installation of custom Kripke:
+1. We will build Kripke integrated with Ascent / SERVIZ using a custom Ascent build. Note that this version of Ascent is **not** the one 
+installed in your spack environment through the spack.yaml file. We are building Ascent manually, purely for using the Kripke example provided with the repo.
+2. Download the custom Ascent repo from here: ```git clone --recursive https://github.com/srini009/ascent.git```
+3. Check out the ```vizservice``` branch: ```git checkout vizservice```
+4. Configure an Ascent build: ```cd ascent && ./config-build.sh```
+5. Build Ascent: ```cd build-debug && make``` (Note: Do NOT use a parallel ```make``` here. For some reason, the build fails if parallel ```make``` is used)
+6. Install Ascent: ```make install```.
+7. Confirm that the build created the Kripke executable: ```ls examples/proxies/kripke/kripke_par```
+
+### Step 6: Run AMR-WIND and Kripke experiments:
 1. At this point you should have all the software components successfully installed and ready to run.
-2. Go to the amr-wind-experiments repo: ```cd $HOME/amr-wind-experiments/``` and start running the experiments by making adjustments to the  Python run scripts as necessary. These scripts are numbered based on the configurations that they represent.
+2. Go to the amr-wind-experiments repo: ```cd $HOME/amr-wind-experiments/``` and start running the experiments by making adjustments to the Python run scripts as necessary. These scripts are numbered based on the configurations that they represent.
