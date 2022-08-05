@@ -1,6 +1,6 @@
 Repository containing the installation instructions and customization scripts for SC 2022 paper427: "SERVIZ: A Shared In Situ Visualization Service"
 
-### Note: It is important to follow these steps in the exact order specified to correctly set up the software components for reproducibility. The instructions here assume that you are logged in to the Theta cluster at ALCF. It is assumed that the directory structure looks like the following:
+### Note: It is important to follow these steps in the exact order specified to correctly set up the software components for reproducibility. The instructions here assume that you are logged in to the Theta cluster at ALCF. Please keep in mind that if you are using a laptop to install the components, reproducing the experimental results (Step 5) would not be possible. It is assumed that the directory structure looks like the following:
   * $HOME/serviz-installation-instructions/
   * $HOME/amr-wind/
   * $HOME/serviz/
@@ -18,11 +18,11 @@ Repository containing the installation instructions and customization scripts fo
 7. Note that the ```experimental``` branch for this repo needs to be used. Verify that the spack repo got added successfully by running: ```spack info mochi-symbiomon```. If you see some valid output, you are good to go!
 
 ### Step 2: Installation of SERVIZ microservice and its dependencies:
-#### Note: At this point, make sure your environment has the right compilers (gcc@9.3.0), Python programming environments, and spack environments correctly loaded. To look at a reference file, see ```$HOME/serviz-installation-instructions/spack_environment_recipe/theta_sourceme.sh```
+#### Note: At this point, make sure your environment has the right compilers (gcc@9.3.0 or higher), Python programming environments, and spack environments correctly loaded. To look at a reference file, see ```$HOME/serviz-installation-instructions/spack_environment_recipe/theta_sourceme.sh```
 1. Go to the SERVIZ github directory: ```cd ../serviz```
-2. Create a spack environment using the already-provided spack.yaml file: ```spack env create serviz spack.yaml```
+2. Create a spack environment using the already-provided spack.yaml file: ```spack env create serviz spack.yaml```. **If using a laptop**, use the ```spack_laptop.yaml``` file instead of the ```spack.yaml``` file to create the environment. 
 3. Install the environment using: ```spack env activate serviz && spack install```
-4. Install the SERVIZ microservice using: ```mkdir build && cd build && cmake .. -DENABLE_TESTS=OFF -DENABLE_EXAMPLES=ON -DENABLE_BEDROCK=OFF -DCMAKE_INSTALL_PREFIX=`pwd` -DCMAKE_C_COMPILER=cc -DCMAKE_CXX_COMPILER=CC```
+4. Install the SERVIZ microservice using: ```mkdir build && cd build && cmake .. -DENABLE_TESTS=OFF -DENABLE_EXAMPLES=ON -DENABLE_BEDROCK=OFF -DCMAKE_INSTALL_PREFIX=`pwd` -DCMAKE_C_COMPILER=cc -DCMAKE_CXX_COMPILER=CC```. If using a laptop, replace ```cc``` with ```mpicc``` and replace ```CC``` with ```mpicxx```.
 5. Login to the cmake shell: ```cd build && ccmake .```
 6. We would need to add the spack-installed ```include``` and ```library``` directories for **Ascent** and **Conduit** to ```CMAKE_CXX_FLAGS```, ```CMAKE_C_FLAGS```, ```CMAKE_EXE_LINKER_FLAGS```, and ```CMAKE_SHARED_LINKER_FLAGS``` respectively. To see an example of what content to add, look inside ```$HOME/serviz-installation-instructions/spack_environment_recipe/theta.cmake_options```
 7. Once this is done, run: ```make -j20 && make install```. 
@@ -31,7 +31,7 @@ Repository containing the installation instructions and customization scripts fo
 1. Download the custom amr-wind repository: ```git clone --recursive https://github.com/srini009/amr-wind.git```
 2. ```mkdir -p $HOME/AMR_WIND_INSTALL```
 3. ```cd $HOME/amr-wind```
-4. ```mkdir build && cd build```
+4. ```mkdir build && cd build```. At this point, **please make sure** that the ```serviz/build/lib/pkgconfig``` has been added to the ```PKG_CONFIG_PATH``` environment variable. Otherwise, you will get CMAKE configuration errors with AMR-WIND.
 5. ```cmake .. -DAMR_WIND_ENABLE_TESTS:BOOL=ON -DAMR_WIND_ENABLE_ASCENT:BOOL=ON -DAscent_DIR:PATH="/spack/path/to/ascent/install/lib/cmake/ascent" -DConduit_DIR:PATH="/spack/path/to/conduit/install" -DCMAKE_INSTALL_PREFIX=$HOME/AMR_WIND_INSTALL -DAMR_WIND_ENABLE_MPI:BOOL=ON -DAMR_WIND_ENABLE_MPI:BOOL=ON```
 6. ```make -j20 && make install```
 
