@@ -47,4 +47,6 @@ installed in your spack environment through the spack.yaml file. We are building
 
 ### Step 5: Run AMR-WIND and Kripke experiments:
 1. At this point you should have all the software components successfully installed and ready to run.
-2. Go to the serviz-experiments repo: ```cd $HOME/serviz-experiments/``` and start running the experiments by making adjustments to the run scripts as necessary. These scripts are numbered based on the configurations that they represent.
+2. **Please note**: You would need access to Theta @ ALCF to reproduce the results. If running on a laptop, you **cannot** 
+reproduce the results but you can run all the distributed components together (MPI simulation + SERVIZ). If running on a laptop, **please use the ```"na+sm"``` protocol** to start up the SERVIZ executable. The run scripts provided in ```$HOME/serviz-experiments``` (for Theta) use the ```"ofi+gni"``` protocol. 
+3. Go to the serviz-experiments repo: ```cd $HOME/serviz-experiments/``` and start running the experiments by making adjustments to the run scripts as necessary. These scripts are numbered based on the configurations that they represent.
